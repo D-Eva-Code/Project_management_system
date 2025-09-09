@@ -23,3 +23,4 @@ urlpatterns = [
     path('', include('projectapp.urls', namespace= 'project')),
     path("user/", include("userapp.urls")),
 ]
+
