@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .forms import userform
+from django.contrib import messages
+
 # Create your views here.
 
 def register(request):
