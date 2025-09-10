@@ -17,6 +17,7 @@
             padding: 30px;
             border-radius: 15px;
             min-width: 350px;
+            color: white;
         }
         .bg-transparent label, 
         .bg-transparent .helptext, 
@@ -25,8 +26,7 @@
     color: white !important;
 }
         .bg-transparent .errorlist li,
-    .bg-transparent .invalid-feedback,
-    .bg-transparent .form-control.is-invalid + .errorlist li {
+    .bg-transparent .invalid-feedback {
     color: #ffdddd !important; /* light red for errors */
 }
         .light-shadow {
@@ -55,8 +55,8 @@
                 background-position: center;">
 
         <!-- Form container -->
-        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px; text-light">
-            <h1 class="mb-4 text-light">Register</h1>
+        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px;">
+            <h1 class="mb-4 text-light">Register on ProjLink</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
