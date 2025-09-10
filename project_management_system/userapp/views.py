@@ -8,8 +8,8 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "new user successfully created")
-            return redirect('index.html')
+            return redirect('project:home')
 
     else:
         form= userform()
-    return render(request, "register.html", {"form": form})
+    return render(request, "register.html", {"form": form, "messages":messages})
