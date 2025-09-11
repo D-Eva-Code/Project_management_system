@@ -40,7 +40,14 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 
-    
+    <p>
+    <label for="id_role">Role:</label>
+    <select name="role" id="id_role" required>
+      <option value="">-- Select Role --</option>
+      <option value="student">Student</option>
+      <option value="supervisor">Supervisor</option>
+    </select>
+  </p>
     <div id="student_fields" style="display:none;">
     <p>
       <label for="id_matric_number">Matric Number:</label>
@@ -59,11 +66,47 @@
       <input type="text" name="staff_id" id="id_staff_id">
     </p>
   </div>
+  <div id=select_supervisor style="display:none;">
+    <p>
+        <label for= "supervisor_list">Choose Supervisor</label>
+        {{form.supervisor}}
+    </p>
+
+  </div>
   <button type="submit" class="btn btn-primary w-100">Register</button>
             </form>
 
         </div>
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            const selectrole= document.getElementById("id_role");
+            const studentfield= document.getElementById("student_fields");
+            const supervisorfield= document.getElementById("supervisor_fields");
+            const selectdropdown= document.getElementById("select_supervisor");
+
+        
+            function togglefields(){
+                if(selectrole.value===student){
+                    studentfield.style.display="block";
+                    supervisorfield.style.display="none";
+                    selectdropdown.style.display="none";
+
+                }
+                else if(selectrole.value===supervisor){
+                    studentfield.style.display="none";
+                    supervisorfield.style.display="block";
+                    selectdropdown.style.display="none";
+                }
+                else{
+                    studentfield.style.display="none";
+                    supervisorfield.style.display="none";
+                    selectdropdown.style.display="none"
+                }
+            }
+        })
+
+    </script>
 </body>
 </html>
