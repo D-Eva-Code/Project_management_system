@@ -10,7 +10,10 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "new user successfully created")
-            return redirect('project:home')
+            if role== "student":
+                return redirect('project:student_dashboard')
+            else:    
+                return redirect('project:supervisor_dashboard')
 
     else:
         form= userform()

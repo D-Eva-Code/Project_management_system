@@ -40,15 +40,16 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 
-    <p>
+    {% comment %} <p>
     <label for="id_role">Role:</label>
     <select name="role" id="id_role" required>
       <option value="">-- Select Role --</option>
       <option value="student">Student</option>
       <option value="supervisor">Supervisor</option>
     </select>
-  </p>
-    <div id="student_fields" style="display:none;">
+  </p> {% endcomment %}
+
+    {% comment %} <div id="student_fields" style="display:none;">
     <p>
       <label for="id_matric_number">Matric Number:</label>
       <input type="text" name="matric_number" id="id_matric_number">
@@ -65,10 +66,11 @@
       <label for="id_staff_id">Staff ID:</label>
       <input type="text" name="staff_id" id="id_staff_id">
     </p>
-  </div>
-  <div id=select_supervisor style="display:none;">
+  </div> {% endcomment %}
+    <!-- Supervisor selection for students -->
+  <div id="select_supervisor" style="display:none;">
     <p>
-        <label for= "supervisor_list">Choose Supervisor</label>
+        <label for= "supervisor_list " id= "select_supervisor">Choose Supervisor</label>
         {{form.supervisor}}
     </p>
 
@@ -82,30 +84,34 @@
     <script>
         document.addEventListener("DOMContentLoaded",()=>{
             const selectrole= document.getElementById("id_role");
-            const studentfield= document.getElementById("student_fields");
-            const supervisorfield= document.getElementById("supervisor_fields");
+            const studentfield1= document.getElementById("id_matric_number");
+            const studentfield2= document.getElementById("id_department");
+            const supervisorfield= document.getElementById("id_staff_id");
             const selectdropdown= document.getElementById("select_supervisor");
 
         
             function togglefields(){
-                if(selectrole.value===student){
-                    studentfield.style.display="block";
-                    supervisorfield.style.display="none";
-                    selectdropdown.style.display="none";
+                if(selectrole.value==="student"){
+                    studentfield1.parentElement.style.display="block";
+                    studentfield2.parentElement.style.display="block";
+                    supervisorfield.parentElement.style.display="none";
+                    selectdropdown.style.display="block";
 
                 }
-                else if(selectrole.value===supervisor){
-                    studentfield.style.display="none";
-                    supervisorfield.style.display="block";
+                else if(selectrole.value==="supervisor"){
+                    studentfield1.parentElement.style.display="none";
+                    studentfield2.parentElement.style.display="none";
+                    supervisorfield.parentElement.style.display="block";
                     selectdropdown.style.display="none";
                 }
                 else{
-                    studentfield.style.display="none";
-                    supervisorfield.style.display="none";
-                    selectdropdown.style.display="none"
+                    studentfield1.parentElement.style.display="none";
+                    studentfield2.parentElement.style.display="none";
+                    supervisorfield.parentElement.style.display="none";
+                    selectdropdown.style.display="none";
                 }
             }
-            roleselect.addEventListener('change', togglefields);
+            selectrole.addEventListener('change', togglefields);
             togglefields();
         });
 
