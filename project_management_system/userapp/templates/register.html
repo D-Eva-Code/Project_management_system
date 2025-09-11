@@ -35,27 +35,27 @@
     </style>
 </head>
 <body>
-    {% comment %} <div class=" background-image" style="background-image: url('{%static "images/bg.jpg"%}'); height: 100vh; background-size: cover; background-position: center;">
-    
-    <div class= "container "> {% endcomment %}
-        {% comment %} <div class="alert alert-info mt-5" role="alert">
+   {% comment %} <div class="alert alert-info mt-5" role="alert">
             {% if messages %}
-                {% for message in messages %}
+                
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        {{ message }}
+                        {{ messages }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                {% endfor %}
+           
             {% endif %}
-        </div> {% endcomment %}
+            </div> {% endcomment %}
+       
         <div class="d-flex justify-content-center align-items-center" 
          style="background-image: url('{% static "images/aces_blue.avif" %}'); 
                 height: 100vh; 
                 background-size: cover; 
                 background-position: center;">
-
+            
+                 
         <!-- Form container -->
-        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px;">
+         <a href= "{% url "login" %}" class="loginlink">Login</a>
+        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px; positon:relative;">
             <h1 class="mb-4 text-light">Register on ProjLink</h1>
             <form method="post">
                 {% csrf_token %}
