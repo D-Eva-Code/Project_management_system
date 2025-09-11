@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href = "{% static "css/style.css" %}" rel= "stylesheet">
+    <link href = "{% static 'css/style.css' %}" rel= "stylesheet">
     {% comment %} <link rel="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -33,7 +33,7 @@
         <!-- Form container -->
          
         <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px; positon:relative;">
-            <a href= "{% url "login" %}" class="loginlink fw-bold">Login</a>
+            <a href= "{% url 'login' %}" class="loginlink fw-bold">Login</a>
 
             <h1 class="mb-4 text-light">Register on ProjLink</h1>
             <form method="post">
@@ -105,7 +105,9 @@
                     selectdropdown.style.display="none"
                 }
             }
-        })
+            roleselect.addEventListener('change', togglefields);
+            togglefields();
+        });
 
     </script>
 </body>

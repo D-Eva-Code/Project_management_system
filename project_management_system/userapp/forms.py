@@ -2,13 +2,14 @@ from django.urls import path
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import CustomUser
 
 class userform(UserCreationForm):
     # Email= forms.EmailField()
     # Name= forms.CharField(max_length=100)
     class Meta:
-        model= User
-        fields=['username','email', 'password1', 'password2', 'role', 'matricnumber', 'department','staff_id', 'supervisor']
+        model= CustomUser
+        fields=['username','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor']
 
     def clean(self):
         cleaned_data= super().clean()
