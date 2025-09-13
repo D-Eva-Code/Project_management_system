@@ -4,25 +4,45 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import CustomUser
 
-class userform(UserCreationForm):
-    # Email= forms.EmailField()
-    # Name= forms.CharField(max_length=100)
+class Userform(UserCreationForm):
+    
     class Meta:
         model= CustomUser
-        fields=['username','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor']
+        fields=['username','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor',]
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['matric_number'].required= False
+        self.fields['department'].required= False
+        self.fields['staff_id'].required= False
+        self.fields['supervisor'].required= False
+
+        for fieldname in ['password1', 'password2', 'username']:
+            self.fields[fieldname].help_text = (
+                f"<div class='form-text text-light'>{self.fields[fieldname].help_text}</div>"
+            )
 
     def clean(self):
         cleaned_data= super().clean()
         role= cleaned_data.get('role')
 
-        if role== "student" and not cleaned_data.get("matric_number"):
-            self.add_error("matric number", "Student must enter matric number")
+        
+        if role=="student":
+            required_fields= ["matric_number", "department", "supervisor"]
+            for field in required_fields:
+                if not cleaned_data.get(field):
+                    self.add_error(field, f"Student must enter {field.replace('_', ' ')}")  
 
-        if role== "student" and not cleanded_data.get("supervisor"):
-            self.add_error("matric number", "Student must select a supervisor")
-
-        if role== "superisor" and not cleaned_data.get("staff_id"):
-            self.add_error("staff_id", "Supervisor must enter staff ID")
+        
+        elif role== "supervisor":
+            if not cleaned_data.get("staff_id"):
+                self.add_error("staff_id", "Supervisor must enter staff ID")
+ 
+            forbidden_fields= ["matric_number", "department", "supervisor"]
+            for field in forbidden_fields:
+                if cleaned_data.get(field):
+                    self.add_error(field, f"Supervisor cannot have {field.replace('_', ' ')}")
 
         
 

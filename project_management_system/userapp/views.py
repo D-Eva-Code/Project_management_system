@@ -1,21 +1,28 @@
-from django.shortcuts import render
-from .forms import userform
+from django.shortcuts import render, redirect
+from .forms import Userform
 from django.contrib import messages
 
 # Create your views here.
 
 def register(request):
     if request.method=="POST":
-        form= userform(request.POST)
+        form= Userform(request.POST)
         if form.is_valid():
+            role=form.cleaned_data.get('role')
+            print(role)
             form.save()
             messages.success(request, "new user successfully created")
             if role== "student":
+                print("Redirecting to student dashboard...")
+                # return redirect('student_dashboard.html')
                 return redirect('project:student_dashboard')
-            else:    
+            else:   
+                print("Redirecting to student dashboard...") 
+                # return redirect('supervisor_dashboard.html')
                 return redirect('project:supervisor_dashboard')
-
+        else:
+            print(form.errors)
     else:
-        form= userform()
-    return render(request, "register.html", {"form": form, "messages":messages})
+        form= Userform()
+    return render(request, "register.html", {"form": form})
 

@@ -1,39 +1,40 @@
 .loginlink{
-    position: absolute;
-    top:70px;
-    right: 60px;
-    color: white;
+    /* position: absolute;
+    top:40px;
+    right: 150px;*/
+    color: white; 
     text-decoration: underline;
     font-weight: bold;
-    text-underline-offset: 8px;
+    text-underline-offset: 15px;
     text-decoration-color: white;
+    font-size: 20px;
 
 }
 .loginlink:hover{
     text-decoration: underline;
     color: lightblue;
-    text-underline-offset: 8px;
+    text-underline-offset: 15px;
     text-decoration-color: lightblue;
 
 }
 
 .bg-transparent {
-            background-color: rgba(255, 255, 255, 0.8); 
-            padding: 30px;
-            border-radius: 15px;
-            min-width: 350px;
-            color: white;
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 30px;
+    border-radius: 15px;
+    min-width: 350px;
+    color: white;
         }
-        .bg-transparent label, 
-        .bg-transparent .helptext, 
-        .bg-transparent .text-muted,
-        .bg-transparent .invalid-feedback {
+.bg-transparent ul li,
+.bg-transparent .form-text{
     color: white !important;
 }
-        .bg-transparent .errorlist li,
-    .bg-transparent .invalid-feedback {
+.bg-transparent .errorlist li,
+.bg-transparent .invalid-feedback {
     color: #ffdddd !important; /* light red for errors */
 }
-        .light-shadow {
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.8);
-        }
+.light-shadow {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.8);
+}
+
+/*  */

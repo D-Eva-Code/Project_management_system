@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 
 # Create your views here.
-def home(request):
+def student(request):
     # return HttpResponse("Home page")
-    return render(request, 'index.html')
+    return render(request, 'student_dashboard.html')
+
+def supervisor(request):
+    # return HttpResponse("Home page")
+    return render(request, 'supervisor_dashboard.html')
