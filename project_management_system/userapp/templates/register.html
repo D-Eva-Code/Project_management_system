@@ -11,29 +11,19 @@
     <link href = "{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-   {% comment %} <div class="alert alert-info mt-5" role="alert">
-            {% if messages %}
-                
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        {{ messages }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-           
-            {% endif %}
-            </div> {% endcomment %}
        
-        <div class="d-flex justify-content-center align-items-center" 
+        <div class="d-flex justify-content-center align-items-center container-fluid position-relative" 
          style="background-image: url('{% static "images/aces_blue.avif" %}'); 
                 height: 100vh; 
                 background-size: cover; 
                 background-position: center;"
-                "position: relative;">
+                >
             
                  
         <!-- Form container -->
-         
-        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow" style="min-width: 350px; ">
-            <a href= "{% url 'login' %}" class="loginlink fw-bold position-absolute top-5 m-3 end-0">Login</a>
+         <a href= "{% url 'login' %}" class="loginlink fw-bold position-absolute top-2 m-3 end-2">Login</a>
+        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow form-scroll " style="min-width: 350px; max-width:500px; max-height: 90vh; overflow-y:auto; ">
+            
 
             <h1 class="mb-4 text-light">Register on ProjLink</h1>
             <form method="POST" action="{% url 'register' %}">
