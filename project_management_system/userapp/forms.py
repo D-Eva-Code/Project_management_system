@@ -8,7 +8,7 @@ class Userform(UserCreationForm):
     
     class Meta:
         model= CustomUser
-        fields=['username','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor',]
+        fields=['name','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor',]
 
 
     def __init__(self, *args, **kwargs):
@@ -18,7 +18,7 @@ class Userform(UserCreationForm):
         self.fields['staff_id'].required= False
         self.fields['supervisor'].required= False
 
-        for fieldname in ['password1', 'password2', 'username']:
+        for fieldname in ['password1', 'password2']:
             self.fields[fieldname].help_text = (
                 f"<div class='form-text text-light'>{self.fields[fieldname].help_text}</div>"
             )
@@ -43,7 +43,5 @@ class Userform(UserCreationForm):
             for field in forbidden_fields:
                 if cleaned_data.get(field):
                     self.add_error(field, f"Supervisor cannot have {field.replace('_', ' ')}")
-
-        
 
         return cleaned_data
