@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import Userform
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -26,3 +29,16 @@ def register(request):
         form= Userform()
     return render(request, "register.html", {"form": form})
 
+class RoleBasedLoginView(LoginView):
+    template_name = "login.html"
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Invalid username or password.")
+        return super().form_invalid(form)#super here refers to formview. which handles form validation, rerendering and submission
+
+    def get_success_url(self):
+        if self.request.user.role == "student":
+            return reverse("project:student_dashboard")
+        elif self.request.user.role == "supervisor":
+            return reverse("project:supervisor_dashboard")
+        return reverse("register") 
