@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 from .models import CustomUser
 
 class Userform(UserCreationForm):
-    
     class Meta:
         model= CustomUser
         fields=['name','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor',]
-
+        widgets = {
+                'name': forms.TextInput(attrs={'placeholder': 'Enter Full name'})}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
