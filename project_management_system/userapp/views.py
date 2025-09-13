@@ -3,6 +3,8 @@ from .forms import Userform
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -42,3 +44,12 @@ class RoleBasedLoginView(LoginView):
         elif self.request.user.role == "supervisor":
             return reverse("project:supervisor_dashboard")
         return reverse("register") 
+
+@login_required
+def log_out(request):
+    if request.method=="POST":
+        logout(request)
+        messages.success(request, "Logged Out")
+        return redirect('login')
+        
+  
