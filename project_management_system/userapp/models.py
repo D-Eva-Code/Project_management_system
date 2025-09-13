@@ -25,11 +25,14 @@ class CustomUser(AbstractUser):
     )
 
     def __str__(self):
-        return self.username
-    def get_role(self):
-        return f"{self.role} - {self.matric_number or self.staff_id}"
+        return self.full_name
+    def get_id(self):
+        return f"{self.matric_number or self.staff_id}"
+    @property #allows to access full_name as an attribute instead of as a method
+    def full_name(self):
+        return self.name or f"{self.first_name} {self.last_name}".strip()
 
-    def save_username(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.username:
             if self.name:
                 base_username = slugify(self.name)

@@ -22,7 +22,7 @@ def register(request):
                 # return redirect('student_dashboard.html')
                 return redirect('project:student_dashboard')
             else:   
-                print("Redirecting to student dashboard...") 
+                print("Redirecting to supervisor dashboard...") 
                 # return redirect('supervisor_dashboard.html')
                 return redirect('project:supervisor_dashboard')
         else:

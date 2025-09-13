@@ -4,6 +4,6 @@ from userapp.models import CustomUser
 @admin.register(CustomUser)
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display= ['username', 'role', 'get_role', 'department', 'supervisor']
+    list_display= ['username', 'name', 'role', 'get_id', 'department', 'supervisor']
     list_filter= ['role', 'department']
     search_fields= ['username', 'staff_id', 'matric_number']
