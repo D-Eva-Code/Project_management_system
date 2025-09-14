@@ -27,17 +27,15 @@ class Userform(UserCreationForm):
 
 
     def clean_email(self):
-        email= self.cleaned_data['email']
+        email= self.cleaned_data.get('email')
 
         if CustomUser.objects.filter(email=email).exists():
             raise ValidationError("This Email already Exits")
-            return email
+        return email
         
     def clean(self):
         cleaned_data= super().clean()
         role= cleaned_data.get('role')
-        email= cleaned_data.get('email')
-
         
         if role=="student":
             required_fields= ["matric_number", "department", "supervisor"]
