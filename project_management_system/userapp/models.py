@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
     staff_id= models.CharField(max_length=20, null=True, blank=True)
     matric_number= models.CharField(max_length=20, null=True, blank=True)
     department= models.CharField(max_length= 30, null=True, blank=True)
+    email= models.EmailField(unique=True)
 
     supervisor= models.ForeignKey(
         'self',

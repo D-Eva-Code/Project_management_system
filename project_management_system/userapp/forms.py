@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import CustomUser
+from django.core.exceptions import ValidationError
+
 
 class Userform(UserCreationForm):
     class Meta:
@@ -23,9 +25,18 @@ class Userform(UserCreationForm):
                 f"<div class='form-text text-light'>{self.fields[fieldname].help_text}</div>"
             )
 
+
+    def clean_email(self):
+        email= self.cleaned_data['email']
+
+        if CustomUser.objects.filter(email=email).exists():
+            raise ValidationError("This Email already Exits")
+            return email
+        
     def clean(self):
         cleaned_data= super().clean()
         role= cleaned_data.get('role')
+        email= cleaned_data.get('email')
 
         
         if role=="student":
