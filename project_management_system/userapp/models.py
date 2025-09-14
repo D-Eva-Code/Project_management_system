@@ -26,11 +26,11 @@ class CustomUser(AbstractUser):
     )
 
     def __str__(self):
-        return self.full_name
+        return self.get_full_name
     def get_id(self):
         return f"{self.matric_number or self.staff_id}"
     @property #allows to access full_name as an attribute instead of as a method
-    def full_name(self):
+    def get_full_name(self):
         return self.name or f"{self.first_name} {self.last_name}".strip()
 
     def save(self, *args, **kwargs):

@@ -5,6 +5,8 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth import login
+
 
 
 # Create your views here.
@@ -15,8 +17,9 @@ def register(request):
         if form.is_valid():
             role=form.cleaned_data.get('role')
             print(role)
-            form.save()
-            messages.success(request, "new user successfully created")
+            user =form.save()
+            login(request, user)
+            # messages.success(request, "new user successfully created")
             if role== "student":
                 print("Redirecting to student dashboard...")
                 # return redirect('student_dashboard.html')
@@ -51,5 +54,3 @@ def log_out(request):
         logout(request)
         messages.success(request, "Logged Out")
         return redirect('login')
-        
-  

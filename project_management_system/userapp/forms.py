@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import CustomUser
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import gettext_lazy as _
 
 class Userform(UserCreationForm):
     class Meta:
@@ -54,3 +55,33 @@ class Userform(UserCreationForm):
                     self.add_error(field, f"Supervisor cannot have {field.replace('_', ' ')}")
 
         return cleaned_data
+
+    def clean_name(self):
+        name= self.cleaned_data['name']
+        parts= name.split(' ',1)
+        self.cleaned_data["first_name"]= parts[0]
+        self.cleaned_data["last_name"]= parts[1] if len(parts)> 1 else ''
+        return name
+
+    def save(self, commit=True):
+        user= super().save(commit=False)
+        user.first_name=self.cleaned_data["first_name"]
+        user.last_name=self.cleaned_data["last_name"]
+        if commit:
+            user.save()
+        return user
+
+        
+class EmailAuthentication(AuthenticationForm):
+    username= forms.EmailField(label="Email", 
+    widget=forms.EmailInput(attrs={'autofocus':True, 'autocomplete':'off'}),
+        )
+
+    password= forms.CharField(label="Password",
+    widget=forms.PasswordInput(attrs={'autocomplete':'off'}))
+
+    # Override the form-level messages (no %(username)s interpolation)
+    error_messages = {
+        "invalid_login": _("Please enter a correct email and password. Note that both fields may be case-sensitive."),
+        "inactive": _("This account is inactive."),}
+    

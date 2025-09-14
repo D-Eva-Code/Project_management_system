@@ -137,3 +137,8 @@ CRISPY_TEMPLATE_PACK="bootstrap5"
 LOGIN_REDIRECT_URL="/"
 LOGIN_URL="login"
 AUTH_USER_MODEL= "userapp.CustomUser"
+
+AUTHENTICATION_BACKENDS = [
+    "userapp.backends.EmailBackend",
+    'django.contrib.auth.backends.ModelBackend',
+]

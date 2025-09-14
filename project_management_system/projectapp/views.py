@@ -10,4 +10,5 @@ def student(request):
 @login_required
 def supervisor(request):
     # return HttpResponse("Home page")
-    return render(request, 'supervisor_dashboard.html')
+    full_name= request.user.get_full_name if request.user.is_authenticated else ""
+    return render(request, 'supervisor_dashboard.html', {"full_name":full_name})
