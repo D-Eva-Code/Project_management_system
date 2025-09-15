@@ -12,7 +12,7 @@ class Userform(UserCreationForm):
         model= CustomUser
         fields=['name','email', 'password1', 'password2', 'role', 'matric_number', 'department','staff_id', 'supervisor',]
         widgets = {
-                'name': forms.TextInput(attrs={'placeholder': 'Enter Full name'})}
+                'name': forms.TextInput(attrs={'placeholder': 'First-Middle-Last Name'})}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

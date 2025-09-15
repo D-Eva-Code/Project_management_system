@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import login
+from django.conf import settings
 
 
 
@@ -18,7 +19,8 @@ def register(request):
             role=form.cleaned_data.get('role')
             print(role)
             user =form.save()
-            login(request, user)
+            backend= settings.AUTHENTICATION_BACKENDS[0]#automatically authenticate and login user after registering
+            login(request, user, backend= backend)
             # messages.success(request, "new user successfully created")
             if role== "student":
                 print("Redirecting to student dashboard...")
