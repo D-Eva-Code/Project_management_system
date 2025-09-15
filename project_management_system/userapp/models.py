@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 import uuid
+from django.conf import settings
 
 # Create your models here.
 class CustomUser(AbstractUser):
@@ -24,6 +25,7 @@ class CustomUser(AbstractUser):
         limit_choices_to= {'role':'supervisor'},
         related_name= 'students'
     )
+    # owner= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.get_full_name
