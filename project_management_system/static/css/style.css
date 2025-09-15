@@ -74,3 +74,24 @@
   scrollbar-color: rgba(255,255,255,0.35) transparent;
 }
 
+.bg-grayish{
+    background-color: #8885853a;
+  }
+.customoffcanvas{
+    width: 20%!important;
+  }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 139, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.text-blue{
+  color: rgba(0, 0, 139, 1)
+}
+.button-mixed-color{
+  background-image:linear-gradient(to right,#040461 20%,#0740aa 80%) !important;
+  color: white;
+  border-color: white;
+}
+.button-mixed-color:hover{
+  color: white;
+   background-image:linear-gradient(to right,#08088d,#0c50ce) !important;
+}
