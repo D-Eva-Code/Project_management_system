@@ -87,11 +87,16 @@
   color: rgba(0, 0, 139, 1)
 }
 .button-mixed-color{
-  background-image:linear-gradient(to right,#040461 20%,#0740aa 80%) !important;
+  background-image:linear-gradient(45deg,#040461 20%,#0740aa 80%) !important;
   color: white;
   border-color: white;
 }
 .button-mixed-color:hover{
   color: white;
    background-image:linear-gradient(to right,#08088d,#0c50ce) !important;
+  
+}
+.custom-width{
+  width: 120px;
+  font-family: Arial, sans-serif;
 }

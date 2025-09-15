@@ -43,13 +43,16 @@
                 
             </div>
             </div>
-            <a class="navbar-brand fw-bold text-blue" href="#">Student Dashboard</a>
+            <a class="navbar-brand fw-bold text-blue" >
+                <img src= '{% static "images/projlinklogo.png" %}' alt="Logo" width="60" height="60"  >
+                Student Dashboard
+            </a>
                 {% csrf_token %}
-                    <button class="btn ms-auto button-mixed-color" type="submit">Log Out</button>
+                    <button class="btn ms-auto button-mixed-color rounded-pill custom-width" type="submit"><small>Log Out</small></button>
                 </form>
         </div>
         </nav>
-        <div class="d-flex">
+        <div class="">
                 <div class=" text-dark p-2 mt-5">
                     Welcome, <b>{{ full_name }}</b>
                 </div>
