@@ -4,7 +4,6 @@ from projectapp import views
 app_name= 'project'
 
 urlpatterns =[
-    path('supervisor/dashboard', views.supervisor , name='supervisor_dashboard'),
-    path('student/dashboard', views.student, name='student_dashboard'),
-
+    path('supervisor/dashboard', views.supervisor , name='supervisordashboard'),
+    path('student/dashboard', views.student, name='studentdashboard'),
 ]
