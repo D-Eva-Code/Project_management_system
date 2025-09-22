@@ -49,13 +49,13 @@
             </div>
 
             <!-- Toggle Button (only visible on mobile) -->
-            <button class="navbar-toggler d-lg-none" type="button" 
+            <button class="navbar-toggler d-lg-none bg-light" type="button" 
                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" 
                     aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <span class="navbar-brand fw-bold text-blue" >Student Dashboard</span>
+            <span class="navbar-brand fw-bold text-blue dashboardtext ">Student Dashboard</span>
                 <form class="d-flex" action="{% url "logout" %}" method="POST">
                 {% csrf_token %}
                     <button class="btn ms-auto button-mixed-color rounded-pill custom-width" type="submit"><small><i class="fa fa-user"></i>  Log Out</small></button>
@@ -84,7 +84,7 @@
             {% for a in loop_form %}
             <tbody>  
                     <tr>
-                        <td>{{a.file}}</td>
+                        <td><a href="{{a.file.url}}" target= "_blank">{{a.title}}</a></td>
                         <td>{{document.get_status_display}}</td>
                         <td>{{a.upload_time}}</td>
 
