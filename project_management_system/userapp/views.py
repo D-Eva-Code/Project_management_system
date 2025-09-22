@@ -45,14 +45,14 @@ class RoleBasedLoginView(LoginView):
 
     def get_success_url(self):
         if self.request.user.role == "student":
-            return reverse("project:student_dashboard")
+            return reverse("project:studentdashboard")
         elif self.request.user.role == "supervisor":
-            return reverse("project:supervisor_dashboard")
+            return reverse("project:supervisordashboard")
         return reverse("register") 
 
 @login_required
 def log_out(request):
     if request.method=="POST":
         logout(request)
-        messages.success(request, "Logged Out")
+        # messages.success(request, "Logged Out")
         return redirect('login')

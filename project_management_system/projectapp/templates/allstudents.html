@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Supervisor Dashboard</title>
+{% endblock title %}
+{% block content %}
+   <div class= "container">
+     
+   </div>
+    <div class= "container px-5">
+         {% comment %} <table class="table table-striped">
+          <thead class="thead-dark">  
+                <tr>
+                 <th class="col-4">File</th>
+                 <th class="col-4">Status</th>
+                 <th class="col-4">Time Uploaded</th>
+                 <th class="col-4">Update Status</th>
+                 </tr>
+          </thead>
+          {% if loop_form %}
+                {% for a in loop_form %}
+                <tbody>  
+                      <tr>
+                            <td>{{a.file}}</td>
+                            <td>{{document.get_status_display}}</td>
+                            <td>{{a.time}}</td>
+                            <td> {% endcomment %}
+                             <form method="POST" action="{% url 'project:update_project_status' document.id %}">
+                                  {% csrf_token %}
+                                  <select name="status" class="form-select">
+                                    {% for value, label in document.STATUS_CHOICES %}
+                                        <option value="{{value}}" {% if document.status == value %}selected{% endif %}>
+                                            {{label}}
+                                        </option>
+                                    {% endfor %} 
+                                  </select>
+                                  <button type="submit" class="btn btn-primary btn-sm mt-2">Update</button>
+                             </form>
+                            {% comment %} </td>
+                      </tr>
+    
+                </tbody>
+                {% endfor %}
+          {% else %}
+                <p>Nothing uploaded</p>
+                
+          {% endif %}
+         </table> {% endcomment %}
+   </div>
+{% endblock content %}
+</html>
