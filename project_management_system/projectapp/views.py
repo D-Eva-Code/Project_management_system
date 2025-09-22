@@ -29,6 +29,8 @@ def supervisor(request):
     full_name= request.user.get_full_name if request.user.is_authenticated else ""
     return render(request, 'supervisor_dashboard.html', {"full_name":full_name})
 
+@login_required
+def projectupload(request):
+    loop_form= Document.objects.all()
 
-# def formView(request):
-    
+    return render(request, "project.html", {"loop_form":loop_form})

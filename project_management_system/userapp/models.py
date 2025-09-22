@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
         limit_choices_to= {'role':'supervisor'},
         related_name= 'students'
     )
-    # owner= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
+   
 
     def __str__(self):
         return self.get_full_name
@@ -45,14 +45,6 @@ class CustomUser(AbstractUser):
 
             unique_username=f"{base_username}-{uuid.uuid4().hex[:6]}"
             self.username= unique_username
-
-        # if not self.owner_id:
-        # # If this is a new superuser being created, set owner to self
-        #     super().save(*args, **kwargs)  # save first to get an ID
-        #     if not self.owner_id:
-        #         self.owner = self
-        #         super().save(update_fields=["owner"])
-        #     return
 
     
         super().save(*args, **kwargs)

@@ -6,4 +6,5 @@ app_name= 'project'
 urlpatterns =[
     path('supervisor/dashboard', views.supervisor , name='supervisordashboard'),
     path('student/dashboard', views.student, name='studentdashboard'),
+    path('student/projcetuploads', views.projectupload, name= 'projectupload')
 ]

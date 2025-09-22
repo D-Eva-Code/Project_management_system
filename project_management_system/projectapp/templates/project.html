@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    <title>Student Dashboard</title>
+{% endblock title %}
+{% block content %}
+
+   <div class= "container px-5">
+       <table class="table table-striped">
+        <thead class="thead-dark">  
+            <tr>
+                <th class="col-4">File</th>
+                <th class="col-4">Status</th>
+                <th class="col-4">Time Uploaded</th>
+                </tr>
+        </thead>
+        {% if loop_form %}
+            {% for a in loop_form %}
+            <tbody>  
+                    <tr>
+                        <td>{{a.file}}</td>
+                        <td>{{a.status}}</td>
+                        <td>{{a.time}}</td>
+
+                    </tr>
+
+            </tbody>
+            {% endfor %}
+        {% else %}
+            <p>Nothing uploaded</p>
+            
+        {% endif %}
+       </table>
+    </div>
+   
+{% endblock content %}
+</html>

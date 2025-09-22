@@ -8,6 +8,12 @@
 {% block content %}
 
    <div class= "container px-5">
+     <div >
+                <div class=" text-dark  mt-3 ">
+                    <span role="img" aria-label="waving Emoji">&#128075;</span>Welcome, <b>{{ full_name }}!</b>
+                </div>
+                
+            </div>
         <div>
             {% if messages %}
                 {% for message in messages %}
@@ -19,8 +25,10 @@
             {% endif %}
         </div>
         <div>
-        <form method= "POST" action="{% url "project:studentdashboard" %}">
+            <h1 class="upload-heading align-item-center">Upload Your Project</h1>
+        <form method= "POST" action="{% url "project:studentdashboard" %}" enctype="multipart/form-data">
             {% csrf_token %}
+            {% comment %} {{form.file.help_text}} {% endcomment %}
             {{form|crispy}}
         </div>
         </form>
