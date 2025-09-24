@@ -25,11 +25,11 @@ def register(request):
             if role== "student":
                 print("Redirecting to student dashboard...")
                 # return redirect('student_dashboard.html')
-                return redirect('project:student_dashboard')
+                return redirect('project:studentdashboard')
             else:   
                 print("Redirecting to supervisor dashboard...") 
                 # return redirect('supervisor_dashboard.html')
-                return redirect('project:supervisor_dashboard')
+                return redirect('project:supervisordashboard')
         else:
             print(form.errors)
     else:

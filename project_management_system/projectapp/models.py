@@ -5,7 +5,7 @@ from django.conf import settings
 class Document(models.Model):
     file= models.FileField(upload_to='documents/%Y/%m/%d')
     upload_time= models.DateTimeField(auto_now_add= True)
-    title= models.CharField(max_length=40 , default='Project Document')
+    title= models.CharField(max_length=40)
    
     
 
@@ -36,6 +36,7 @@ class Document(models.Model):
         on_delete= models.CASCADE,
         related_name= 'supervised_students'
     )
+    owner= models.ForeignKey(settings.AUTH_USER_MODEL,null=True,blank=True,on_delete= models.CASCADE)
 
     def __str__(self):
         return self.title

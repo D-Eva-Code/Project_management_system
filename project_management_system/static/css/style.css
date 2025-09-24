@@ -116,7 +116,7 @@
 .button-mixed-color{
   background-image:linear-gradient(45deg,#040461 20%,#0740aa 80%) !important;
   color: white;
-  border-color: white;
+  border-color: #08088d;
   
 }
 .button-mixed-color:hover{

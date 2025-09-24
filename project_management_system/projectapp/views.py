@@ -16,8 +16,10 @@ def student(request):
         full_name=request.user.get_full_name
         if request.method=="POST":
             form= UploadForm(request.POST, request.FILES)
-            if form.is_valid:
-                new_form= Document(file= request.FILES['file'])
+            if form.is_valid():
+                # new_form= Document(file= request.FILES['file'])
+                new_form= form.save(commit=False)
+                new_form.owner= request.user
                 new_form.save()
                 messages.success(request, "File Successfully Uploaded")
         else:
@@ -36,7 +38,10 @@ def supervisor(request):
 
 @login_required
 def projectupload(request):
-    loop_form= Document.objects.all()
+    if request.user.is_authenticated:
+       loop_form= Document.objects.filter(owner=request.user)
+    else:
+        loop_form= Document.objects.none()
 
     return render(request, "project.html", {"loop_form":loop_form})
 

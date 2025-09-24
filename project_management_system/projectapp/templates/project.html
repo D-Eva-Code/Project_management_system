@@ -15,11 +15,11 @@
     <link href = "{% static 'css/style.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/67d98369eb.js" crossorigin="anonymous"></script>
 </head>
-
+{% if user.is_authenticated %}
 <body class="bg-white m-0 ">
    <div class= "container mt-2">
        <div class= "container justify-content-center">
-        {% if user.is_authenticated %}
+        
     
     <nav class="navbar navbar-dark bg-white">
         <div class="container">
@@ -71,6 +71,7 @@
     </div>
 {% block content %}
 
+
    <div class= "container px-5">
        <table class="table table-striped">
         <thead class="thead-dark">  
@@ -80,6 +81,7 @@
                 <th class="col-4">Time Uploaded</th>
                 </tr>
         </thead>
+    {% if user.is_authenticated %}
         {% if loop_form %}
             {% for a in loop_form %}
             <tbody>  
@@ -96,6 +98,9 @@
             <p>Nothing uploaded</p>
             
         {% endif %}
+    {% else %}
+        <p>Please log in to view your content.</p>
+    {% endif %}
        </table>
     </div>
    
