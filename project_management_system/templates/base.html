@@ -28,9 +28,9 @@
             <div class="offcanvas offcanvas-start customoffcanvas bg-dark text-white" id="offcanvasNavbar">
             <div class="offcanvas-body">
                 <ul class="navbar-nav me-auto">
-                    {% comment %} <li class="nav-item mb-3">
-                        <a href="#"><img src='{% static "images/projlinklogo.png" %}' alt="Logo" width="60" height="60"></a>
-                    </li> {% endcomment %}
+                    <li class="nav-item mb-3 text-center">
+                        <a href="#"><img src='{% static "images/profile.png" %}' alt="Logo" width="60" height="60"></a>
+                    </li> 
                    <li class="nav-item mb-3">
                      {% if user.role == "student" %}
                         <a class="nav-link active fw-bold px-3 bg-grayish" href="{% url 'project:studentdashboard' %}">
