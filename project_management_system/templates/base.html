@@ -11,7 +11,67 @@
     <link href = "{% static 'css/style.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/67d98369eb.js" crossorigin="anonymous"></script>
 </head>
+    
+<body class="bg-white m-0 ">
+   <div class= "container mt-2">
+       <div class= "container justify-content-center">
+        
+    
+    <nav class="navbar navbar-dark bg-white">
+        <div class="container">
+            
+            {% comment %} <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+            </button>  {% endcomment %}
 
+            <!-- Sidebar / Offcanvas -->
+            <div class="offcanvas offcanvas-start customoffcanvas bg-dark text-white" id="offcanvasNavbar">
+            <div class="offcanvas-body">
+                <ul class="navbar-nav me-auto">
+                    {% comment %} <li class="nav-item mb-3">
+                        <a href="#"><img src='{% static "images/projlinklogo.png" %}' alt="Logo" width="60" height="60"></a>
+                    </li> {% endcomment %}
+                   <li class="nav-item mb-3">
+                     {% if user.role == "student" %}
+                        <a class="nav-link active fw-bold px-3 bg-grayish" href="{% url 'project:studentdashboard' %}">
+                        <i class="fa-solid fa-house"></i> Home</a>
+                    
+                    {% elif user.role == "supervisor" %}
+                        <a class="nav-link active fw-bold px-3 bg-grayish" href="{% url 'project:supervisordashboard' %}">
+                        <i class="fa-solid fa-house"></i> Home</a>
+                    {% endif %}
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link fw-bold px-3" href="{% url "project:projectupload" %}"><i class="fa-solid fa-file-text"></i> Uploads</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link fw-bold px-3" href="#"><i class="fa-solid fa-info"></i> About</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+
+            <!-- Toggle Button (only visible on mobile) -->
+            <button class="navbar-toggler d-lg-none bg-light" type="button" 
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" 
+                    aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <span class="navbar-brand fw-bold text-blue dashboardtext "><a href="#"><img src='{% static "images/projlink_logo.jpg" %}' alt="Logo" width="120" height="30"></a>  Student Dashboard</span>
+                <form class="d-flex" action="{% url "logout" %}" method="POST">
+                {% csrf_token %}
+                    <button class="btn ms-auto button-mixed-color rounded-pill custom-width" type="submit"><small><i class="fa fa-user"></i>  Log Out</small></button>
+                </form>
+        </div>
+    </nav>
+        
+       
+       
+     
+    </div>
+
+    </div>
    {% block content %}
    {% endblock content %}
 </body>
