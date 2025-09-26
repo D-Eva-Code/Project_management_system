@@ -29,7 +29,7 @@ def register(request):
             else:   
                 print("Redirecting to supervisor dashboard...") 
                 # return redirect('supervisor_dashboard.html')
-                return redirect('project:supervisordashboard')
+                return redirect('project:supervisordashboard', supervisor_id=request.user.id)
         else:
             print(form.errors)
     else:
@@ -47,7 +47,7 @@ class RoleBasedLoginView(LoginView):
         if self.request.user.role == "student":
             return reverse("project:studentdashboard")
         elif self.request.user.role == "supervisor":
-            return reverse("project:supervisordashboard")
+            return reverse("project:supervisordashboard", kwargs={"supervisor_id": self.request.user.id})
         return reverse("register") 
 
 @login_required

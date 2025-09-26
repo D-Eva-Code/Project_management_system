@@ -10,22 +10,22 @@
  
       <div class= "container px-4">
             <div >
-                <div class=" text-dark  mt-3 ">
+                <div class=" text-dark  mt-3 mb-3">
                     <span role="img" aria-label="waving Emoji">&#128075;</span>Welcome, <b>{{ full_name }}!</b>
                 </div>
                 
             </div>
       
-
-     <ul>
-  {% for student in students %}
-    <li>
-      {{ student.get_full_name }} ({{ student.matric_number }})
-    </li>
-  {% empty %}
-    <li>No students assigned yet.</li>
-  {% endfor %}
-</ul>
+            <h2>Here's a list of your students</h2>
+            <ul>
+            {% for student in students %}
+            <li>
+                  {{ student.get_full_name }} ({{ student.matric_number }})
+            </li>
+            {% empty %}
+            <li>No students assigned yet.</li>
+            {% endfor %}
+            </ul>
    </div>
 {% endblock content %}
 </html>

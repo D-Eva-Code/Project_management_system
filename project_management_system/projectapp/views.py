@@ -10,7 +10,7 @@ from django.contrib import messages
 @login_required
 def student(request):
     if request.user.role != "student":
-        return redirect('project:supervisordashboard')
+        return redirect('project:supervisordashboard', supervisor_id=request.user.id)
     if request.user.is_authenticated:
         # author=CustomUser.objects.filter(owner=request.user)
         full_name=request.user.get_full_name
@@ -29,12 +29,16 @@ def student(request):
 
 
 @login_required
-def supervisor(request):
+def supervisor(request, supervisor_id):
     # return HttpResponse("Home page")
     if request.user.role != "supervisor":
         return redirect("project:studentdashboard")
-    full_name= request.user.get_full_name if request.user.is_authenticated else ""
-    return render(request, 'supervisor_dashboard.html', {"full_name":full_name})
+    else:
+     
+        full_name= request.user.get_full_name if request.user.is_authenticated else ""
+        supervisor = CustomUser.objects.get(id=supervisor_id, role='supervisor')
+        students = supervisor.students.all()  # reverse relation
+    return render(request, 'supervisor_dashboard.html', {"full_name":full_name, 'students': students,'supervisor':supervisor})
 
 @login_required
 def projectupload(request):
