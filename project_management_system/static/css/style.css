@@ -31,7 +31,7 @@
     color: #ffdddd !important; /* light red for errors */
 }
 .light-shadow {
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
 }
 
 /* scrolling container */
@@ -80,6 +80,19 @@
 /* Default Bootstrap offcanvas (mobile behavior) */
 .customoffcanvas {
   width: 150px!important;
+  background-color: #1a1f36!important;
+}
+.customoffcanvas a:hover {
+    background-color: #27408B; 
+    color: #ffffff;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.customoffcanvas li.active a {
+    background-color: #4169E1;  
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 6px;
 }
 
 /* On large screens (lg and up) → make it always visible */
@@ -92,16 +105,30 @@
     left: 0;
     height: 100vh;
     border-right: 1px solid rgba(255,255,255,0.1);
+    background-color: #1a1f36!important;
   }
 
   /* Push page content to the right */
   .dashboardbody {
     margin-left: 150px!important;
   }
+
+  .customoffcanvas a:hover {
+    background-color: #27408B; 
+    color: #ffffff;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.customoffcanvas li.active a {
+    background-color: #4169E1;  
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 6px;
+}
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 139, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 
@@ -110,13 +137,13 @@
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important;
   }
 }
-.text-blue{
+.student-text, .upload-heading{
   color: rgba(0, 0, 139, 1)
 }
 .button-mixed-color{
-  background-image:linear-gradient(45deg,#040461 20%,#0740aa 80%) !important;
+  background-image:linear-gradient(45deg,#040461 20%,#0984f7 80%) !important;
   color: white;
-  border-color: #08088d;
+  border: none;
   
 }
 .button-mixed-color:hover{
@@ -124,12 +151,15 @@
    background-image:linear-gradient(to right,#08088d,#0c50ce) !important;
   
 }
-.dashboardtext{
-  color:white;
+.dashboardtext, .dashboard-text{
+  color:white!important;
 }
 @media (min-width: 992px){
   .dashboardtext{
     color: rgba(0, 0, 139, 1)!important;
+  }
+  .dashboard-text{
+    color: black!important;
   }
 }
 .custom-width{
@@ -146,4 +176,9 @@
   .customnav{
     background-color: white!important;
   }
+}
+
+.color-button{
+  background-color:rgba(0, 0, 139, 1)!important;
+ border: none;
 }

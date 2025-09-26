@@ -17,7 +17,7 @@
        <div class= "container justify-content-center">
         
     
-    <nav class="navbar navbar-dark bg-white">
+    <nav class="navbar navbar-dark bg-white customnav">
         <div class="container">
             
             {% comment %} <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -29,22 +29,25 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item mb-3 text-center">
+                        <a href="#"><img src='{% static "images/projlink_logo_new.png" %}' id="logo-img"alt="Logo" width="120" height="38"></a>
+                    </li> 
+                    <li class="nav-item mb-3 text-center">
                         <a href="#"><img src='{% static "images/profile.png" %}' alt="Logo" width="60" height="60"></a>
                     </li> 
-                   <li class="nav-item mb-3">
+                   <li class="nav-item mb-3 {% if request.path == '/student/dashboard' or request.path == '/supervisor/dashboard' %}active{% endif %}">
                      {% if user.role == "student" %}
-                        <a class="nav-link active fw-bold px-3 bg-grayish" href="{% url 'project:studentdashboard' %}">
+                        <a class="nav-link active fw-bold px-3 " href="{% url 'project:studentdashboard' %}">
                         <i class="fa-solid fa-house"></i> Home</a>
-                    
+
                     {% elif user.role == "supervisor" %}
-                        <a class="nav-link active fw-bold px-3 bg-grayish" href="{% url 'project:supervisordashboard' %}">
+                        <a class="nav-link fw-bold px-3 bg-grayish" href="{% url 'project:supervisordashboard' %}">
                         <i class="fa-solid fa-house"></i> Home</a>
                     {% endif %}
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-3 {% if request.path == '/student/projectuploads' or request.path == '/supervisor/uploads' %}active{% endif %}">
                         <a class="nav-link fw-bold px-3" href="{% url "project:projectupload" %}"><i class="fa-solid fa-file-text"></i> Uploads</a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-3 {% if request.path == '/about' %}active{% endif %}">
                         <a class="nav-link fw-bold px-3" href="#"><i class="fa-solid fa-info"></i> About</a>
                     </li>
                 </ul>
@@ -52,13 +55,15 @@
             </div>
 
             <!-- Toggle Button (only visible on mobile) -->
-            <button class="navbar-toggler d-lg-none bg-light" type="button" 
+            <button class="navbar-toggler d-lg-none" type="button" 
                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" 
                     aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
-            <span class="navbar-brand fw-bold text-blue dashboardtext "><a href="#"><img src='{% static "images/projlink_logo.jpg" %}' alt="Logo" width="120" height="30"></a>  Student Dashboard</span>
+            <span class="navbar-brand">
+            <span  class=" fw-bold student-text dashboardtext"> Student</span>
+            <span class="fw-bold dashboard-text"style="color:black; margin-left:0;"> Dashboard</span>
+            </span>
                 <form class="d-flex" action="{% url "logout" %}" method="POST">
                 {% csrf_token %}
                     <button class="btn ms-auto button-mixed-color rounded-pill custom-width" type="submit"><small><i class="fa fa-user"></i>  Log Out</small></button>
