@@ -16,16 +16,26 @@
                 
             </div>
       
-            <h2>Here's a list of your students</h2>
-            <ul>
-            {% for student in students %}
-            <li>
-                  {{ student.get_full_name }} ({{ student.matric_number }})
-            </li>
-            {% empty %}
-            <li>No students assigned yet.</li>
-            {% endfor %}
-            </ul>
+            
+            <div class="container px-5">
+                  <h2>Here's a list of your students</h2>
+                  <table class="table table-striped table-responsive mt-3">
+                        {% for student in students %} 
+                        <tbody> 
+                              
+                              <tr>
+                              <td class="col-4">{{ student.get_full_name }}</td>
+                              <td class="col-4">{{ student.matric_number }}</td>
+                              <td class="col-4"><a href="#">View Student's Project Details...</a></td>
+                                    </tr>
+                              {% empty %}
+                              <h4>No students assigned yet.</h4>
+                        
+                              </tbody>
+                              {% endfor %}
+                        <div>
+                  </table>
+            
    </div>
 {% endblock content %}
 </html>
