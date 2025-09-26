@@ -21,10 +21,10 @@
                  
         <!-- Form container -->
          <a href= "{% url 'login' %}" class="loginlink fw-bold position-absolute top-0 m-3 end-2">Login</a>
-        <div class="border border-3 p-5 rounded bg-transparent m-4 light-shadow form-scroll " style="min-width: 350px; max-width:500px; max-height: 90vh; overflow-y:auto; ">
+        <div class="border border-3 p-5 rounded bg-transparent m-3 light-shadow form-scroll " style="min-width: 350px; max-width:500px; max-height: 90vh; overflow-y:auto; ">
             
 
-            <h1 class="mb-4" ><span class= "text-light">Register on </span><span style="color: rgb(13, 32, 90); background:white; padding:2px 2px; border-top-left-radius:6px;border-bottom-right-radius: 6px;">ProjLink</span></h1>
+            <h1 class="mb-4 text-center mt-0" ><span class= "text-light">Register</h1>
             <form method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
