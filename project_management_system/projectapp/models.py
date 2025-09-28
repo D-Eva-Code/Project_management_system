@@ -5,7 +5,8 @@ from django.conf import settings
 class Document(models.Model):
     file= models.FileField(upload_to='documents/%Y/%m/%d')
     upload_time= models.DateTimeField(auto_now_add= True)
-    title= models.CharField(max_length=40)
+    title= models.CharField(max_length=40, default='Project Document')
+    description= models.CharField(max_length=200, null=True, blank=True)
    
     
 

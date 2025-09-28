@@ -55,7 +55,11 @@ def supervisor_students(request, supervisor_id):
     students = supervisor.students.all()  # reverse relation
     return render(request, 'supervisor_dashboard.html', {'supervisor': supervisor, 'students': students})
 
-
+@login_required
+def student_projects(request, student_id):
+    student = CustomUser.objects.get(id=student_id, role='student')
+    projects= Document.objects.filter(owner=student)
+    return render(request, 'student_projects.html', {'student':student, 'projects': projects})
 
 # def update_project_status(request, document_id):
 #     document= Document.objects.get(id=document_id)
