@@ -9,8 +9,8 @@
 
    <div class= "container px-5">
      <div >
-                <div class=" text-dark  mt-3 ">
-                    <span role="img" aria-label="waving Emoji">&#128075;</span>Welcome, <b>{{ full_name }}!</b>
+                <div class=" text-dark welcome-text mt-3 ">
+                    <span role="img" aria-label="waving Emoji">&#128075;</span> Welcome, <b>{{ full_name }}!</b>
                 </div>
                 
             </div>
@@ -31,7 +31,7 @@
             {% comment %} {{form.file.help_text}} {% endcomment %}
             {{form|crispy}}
         
-        <button class="btn btn-primary color-button" type= "submit">Upload</button>
+        <button class="btn btn-primary btn-upload" type= "submit">Upload</button>
         </form>
     </div>
    

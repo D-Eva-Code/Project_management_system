@@ -94,6 +94,10 @@
     font-weight: bold;
     border-radius: 6px;
 }
+ /* .dashboardbody {
+    background-color: #fafafa!important;
+  } */
+
 
 /* On large screens (lg and up) → make it always visible */
 @media (min-width: 992px) {
@@ -109,9 +113,8 @@
   }
 
   /* Push page content to the right */
-  .dashboardbody {
-    margin-left: 150px!important;
-  }
+  /* .dashboardbody {
+    background-color: white!important;} */
 
   .customoffcanvas a:hover {
     background-color: #27408B; 
@@ -164,21 +167,67 @@
 }
 .custom-width{
   width: 120px;
-  font-family: Arial, sans-serif;
+  font-family: open-sans, sans-serif!important;
+  
+}
+@media (max-width: 992px){
+  .custom-width{
+    display: none;
+    font-size: 12px;
+  }
+  .logout-button{
+    display: flex;
+    color: white;
+    text-decoration: none;
+  }
+
 }
 
 
 .customnav{
-  background-color: rgba(0, 0, 139, 1)!important;
-}
-
-@media (min-width: 992px){
-  .customnav{
     background-color: white!important;
   }
+
+@media (max-width: 992px){
+  .customnav{
+    background: linear-gradient(135deg, #0061ff, #004aad)!important;
+    color: #fff;
+}
 }
 
-.color-button{
+.btn-upload{
   background-color:rgba(0, 0, 139, 1)!important;
  border: none;
+}
+@media (max-width: 992px){
+  .btn-upload {
+    background: linear-gradient(135deg, #007bff, #004aad);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 139, 0.4)!important;
+    width: 100%!important;
+}
+.btn-upload:hover {
+    background: linear-gradient(135deg, #0056b3, #002d6f);
+}
+}
+
+
+
+.welcome-text{
+  font-size: 15px;
+  margin-bottom:6px ;
+}
+@media (max-width: 576px){
+  .welcome-text{
+    font-size: 13px;
+    margin-bottom: 6px;
+    margin-top: 16px;
+    padding-top: 12px;
+    font-family: open-sans, sans-serif;
+  }
 }

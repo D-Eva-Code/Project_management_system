@@ -30,13 +30,13 @@
                     </div>
                 {% endfor %}
             {% endif %} {% endcomment %}
-            <h1 class="mb-4 text-light text-center">Login</h1>
+            <h1 class="mb-4 text-light text-center">Sign in</h1>
             <form method="post" novalidate>
                 {% csrf_token %}
                 {{ form|crispy }}
 
                 <div class="d-grid mt-3">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                 </div>
             </form>
 
