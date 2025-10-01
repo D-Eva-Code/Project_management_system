@@ -9,11 +9,6 @@ class Document(models.Model):
     description= models.CharField(max_length=200, null=True, blank=True)
    
     
-
-#     def __str__(self):
-#         return self.file
-
-# class SupervisorFeedback(models.Model):
     STATUS_CHOICES=[
         ('submitted', 'Submitted'),
         ('in_review', 'In Review'),
@@ -38,6 +33,9 @@ class Document(models.Model):
         related_name= 'supervised_students'
     )
     owner= models.ForeignKey(settings.AUTH_USER_MODEL,null=True,blank=True,on_delete= models.CASCADE)
+
+    class Meta:
+        ordering= ['-upload_time']
 
     def __str__(self):
         return self.title
