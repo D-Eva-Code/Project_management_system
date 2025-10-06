@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     ]
     role= models.CharField(max_length= 20, choices= ROLE_CHOICES )
     name=models.CharField(max_length=50, null=True)
-    staff_id= models.CharField(max_length=20, null=True, blank=True)
+    staff_id= models.CharField(max_length=20, null=True, blank=True, unique=True)
     matric_number= models.CharField(max_length=20, null=True, blank=True)
     department= models.CharField(max_length= 30, null=True, blank=True)
     email= models.EmailField(unique=True)

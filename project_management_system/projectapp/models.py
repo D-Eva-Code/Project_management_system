@@ -25,13 +25,13 @@ class Document(models.Model):
         on_delete= models.SET_NULL,
         related_name= 'students_supervisor'
     )
-    student= models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True,
-        blank=True,
-        on_delete= models.CASCADE,
-        related_name= 'supervised_students'
-    )
+    # student= models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     null=True,
+    #     blank=True,
+    #     on_delete= models.CASCADE,
+    #     related_name= 'supervised_students'
+    # )
     owner= models.ForeignKey(settings.AUTH_USER_MODEL,null=True,blank=True,on_delete= models.CASCADE)
 
     class Meta:

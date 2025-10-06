@@ -17,7 +17,7 @@
 
 </head>
     
-<body class="bg-white m-0 dashboardbody" hx-ext="ws" ws-connect="/ws/updates" >
+<body class="bg-white m-0 dashboardbody" >
    <div class= "container mt-2">
        <div class= "container justify-content-center">
         
@@ -88,8 +88,10 @@
                 <form class="d-flex" action="{% url "logout" %}" method="POST">
                 {% csrf_token %}
                     <button class="btn ms-auto button-mixed-color rounded-pill custom-width" type="submit"><small><i class="fa fa-sign-out"></i>  Log Out</small></button>
-                    <a href="{% url "logout" %}" class="logout-button d-lg-none"><small><i class="fa fa-sign-out"></i>  Log Out</small></a>
                 </form>
+                
+                    <a href="{% url 'logout' %}" class="logout-button d-lg-none"><small><i class="fa fa-sign-out"></i>  Log Out</small></a>
+
         </div>
     </nav>
         
@@ -101,6 +103,30 @@
     </div>
    {% block content %}
    {% endblock content %}
-   
+   {% comment %} {% block scripts %}
+        <script>
+        if (!window.notificationSocket) {
+            const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+            window.notificationSocket = new WebSocket(
+                wsProtocol + "//" + window.location.host + "/ws/updates/"
+            );
+
+            window.notificationSocket.onmessage = function(e) {
+                console.log(" WebSocket message received:", e.data);
+                const data = JSON.parse(e.data);
+                const ownerId = data.owner_id;
+                const uploadArea = document.querySelector(`#upload-area-${ownerId}`);
+                if (uploadArea) {
+                    uploadArea.outerHTML = data.html;
+                }
+            };
+
+            window.notificationSocket.onclose = function(e) {
+                console.error("Notification socket closed unexpectedly");
+            };
+        }
+        </script>
+{% endblock %} {% endcomment %}
+
 </body>
 </html>

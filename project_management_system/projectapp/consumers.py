@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 
 class NotificationConsumer(WebsocketConsumer):
     def connect(self):
+        
         # print(self.channel_name)
        
         user= self.scope['user']
@@ -13,26 +14,33 @@ class NotificationConsumer(WebsocketConsumer):
         # if not user.is_authenticated or user.role != "supervisor":
         #     self.close()
         #     return
+        if user.is_authenticated and user.role == "supervisor":
+            self.group_name= f"supervisor_{user.id}"
+            print("🧠 Supervisor WebSocket joined group:", self.group_name)
+
+
+            async_to_sync(self.channel_layer.group_add)(
+                self.group_name, self.channel_name
+            )
+            self.accept()
         
-        self.group_name= f"supervisor_{user.id}"
-
-        async_to_sync(self.channel_layer.group_add)(
-            self.group_name, self.channel_name
-        )
-        self.accept()
-
     def disconnect(self, close_code):
-        async_to_sync(self.channel_layer.group_discard)(
-            self.group_name, self.channel_name
-        )
-        pass
+        if hasattr(self, "group_name"):
+            async_to_sync(self.channel_layer.group_discard)(
+                self.group_name, self.channel_name
+            )
 
     def file_uploaded(self, event):
+        print("📨 Consumer received event:", event)
         # self.send(text_data=event['message'])
         html= render_to_string("partial/update.html",
-            {'message': event['message'], 'document_id': event['document_id'], 'student_id': event.get('student_id')}
+            {'message': event['message'], 'owner_id': event['owner_id']}
         )
         self.send(text_data=html)
+        # self.send(text_data=json.dumps({
+        #     'html': html,
+        #     'owner_id': event['owner_id']
+        # }))
         # message= event['message']
         # document_id= event['document_id']
         # self.send(text_data=json.dumps({

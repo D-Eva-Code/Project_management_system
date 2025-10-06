@@ -52,7 +52,7 @@ class RoleBasedLoginView(LoginView):
 
 @login_required
 def log_out(request):
-    if request.method=="POST":
+    # if request.method=="POST":
         logout(request)
         # messages.success(request, "Logged Out")
         return redirect('login')

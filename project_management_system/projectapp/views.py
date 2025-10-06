@@ -12,7 +12,7 @@ def student(request):
     if request.user.role != "student":
         return redirect('project:supervisordashboard', supervisor_id=request.user.id)
     if request.user.is_authenticated:
-        # author=CustomUser.objects.filter(owner=request.user)
+        
         full_name=request.user.get_full_name
         if request.method=="POST":
             form= UploadForm(request.POST, request.FILES)
@@ -20,6 +20,7 @@ def student(request):
                 # new_form= Document(file= request.FILES['file'])
                 new_form= form.save(commit=False)
                 new_form.owner= request.user
+                new_form.supervisor= request.user.supervisor
                 new_form.save()
                 messages.success(request, "File Successfully Uploaded")
         else:
