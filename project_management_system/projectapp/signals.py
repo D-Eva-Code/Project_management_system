@@ -10,18 +10,18 @@ def notify_supervisor_on_upload(sender, instance, created, **kwargs):
     print(f"Created: {created}")
     print(f"Has Owner: {bool(instance.owner)}")
     print(f"Has Supervisor: {bool(instance.supervisor)}")
-    print("📤 Sending to group: supervisor_", instance.supervisor.id)
-    print("📤 Supervisor username:", instance.supervisor.username)
+    print("Sending to group: supervisor_", instance.supervisor.id)
+    print(" Supervisor username:", instance.supervisor.username)
 
     if created  and  instance.owner and instance.supervisor:
         print(f"--- Signal Fired: Notifying supervisor {instance.supervisor.id} ---")
         channel_layer = get_channel_layer()
         supervisor = instance.supervisor
         group_name =  f"supervisor_{supervisor.id}"# Notify the specific supervisor 
-        print(f"📤 Sending to group: {group_name}")
+        print(f"Sending to group: {group_name}")
         event={
                 'type': 'file_uploaded',
-                'message': 'New Upload',
+                'message': 'New Upload!',
                 # 'document_id': instance.id,
                 'owner_id': instance.owner.id
             }

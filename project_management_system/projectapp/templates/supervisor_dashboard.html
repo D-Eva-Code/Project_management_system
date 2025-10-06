@@ -13,9 +13,9 @@
     <link href = "{% static 'css/style.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/67d98369eb.js" crossorigin="anonymous"></script>
     {% comment %} <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}"> {% endcomment %}
-     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js" integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ" crossorigin="anonymous"></script>
-    {% comment %} <script src="https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.2" integrity="sha384-vuKxTKv5TX/b3lLzDKP2U363sOAoRo5wSvzzc3LJsbaQRSBSS+3rKKHcOx5J8doU" crossorigin="anonymous"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js" integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx-ext-ws@2.0.2"></script>
+
 
 </head>
     
@@ -124,7 +124,7 @@
                               <td class="col-3">{{ student.get_full_name }}</td>
                               <td class="col-2">{{ student.matric_number }}</td>
                               <td class="col-3" id="tabledata" ><a href="{% url "project:student_projects" student.id %}">View Student's Project Details...</a></td>
-                              <td class="col-3" id="upload-area-{{owner.id}}"style="color: gray">No new uploads</td>
+                              <td class="col-3" id="upload-area-{{student.id}}"style="color: gray">No new uploads</td>
                               <td class="col-4">Submitted</td>
                                     </tr>
                               {% empty %}
@@ -137,6 +137,29 @@
                   </div>
             
    </div>
+{% comment %} 
+        <script>
+        if (!window.notificationSocket) {
+            const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+            window.notificationSocket = new WebSocket(
+                wsProtocol + "//" + window.location.host + "/ws/updates/"
+            );
+
+            window.notificationSocket.onmessage = function(e) {
+                console.log(" WebSocket message received:", e.data);
+                const data = JSON.parse(e.data);
+                const ownerId = data.owner_id;
+                const uploadArea = document.querySelector(`#upload-area-${ownerId}`);
+                if (uploadArea) {
+                    uploadArea.outerHTML = data.html;
+                }
+            };
+
+            window.notificationSocket.onclose = function(e) {
+                console.error("Notification socket closed unexpectedly");
+            };
+        }
+        </script> {% endcomment %}
 
 </body>
 </html>

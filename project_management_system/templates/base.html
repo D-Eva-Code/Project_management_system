@@ -103,30 +103,7 @@
     </div>
    {% block content %}
    {% endblock content %}
-   {% comment %} {% block scripts %}
-        <script>
-        if (!window.notificationSocket) {
-            const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-            window.notificationSocket = new WebSocket(
-                wsProtocol + "//" + window.location.host + "/ws/updates/"
-            );
-
-            window.notificationSocket.onmessage = function(e) {
-                console.log(" WebSocket message received:", e.data);
-                const data = JSON.parse(e.data);
-                const ownerId = data.owner_id;
-                const uploadArea = document.querySelector(`#upload-area-${ownerId}`);
-                if (uploadArea) {
-                    uploadArea.outerHTML = data.html;
-                }
-            };
-
-            window.notificationSocket.onclose = function(e) {
-                console.error("Notification socket closed unexpectedly");
-            };
-        }
-        </script>
-{% endblock %} {% endcomment %}
+   
 
 </body>
 </html>
