@@ -16,7 +16,7 @@
                             <span class="badge bg-primary">{{totalcounts}} project{{totalcounts|pluralize}} uploaded</span>
                         {% endwith %}
                     </div>
-                        <p>Last Upload: {{loop_form.upload_time}} </p>
+                        <p>Last Upload: {{loop_form.last.upload_time}} </p>
                 </div>
             </div>
             <div class="col-6">
@@ -26,17 +26,10 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><button type="submit" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-2 py-2">&#128269;</button></div>
                         </div>
-                        <input type="text" class="form-control" id="forminput" placeholder="Search Project">
+                        <input type="text" name="q" class="form-control" id="forminput" placeholder="Search Project">
                 </div>
             </form>
             </div>
-           
-                {% comment %} <div class="col-1 my-1">
-                    
-                    <button type="submit" class="btn btn-outline-gray btn-sm fw-bold rounded-pill px-2 py-2">&#128269;</button>
-                </div> {% endcomment %}
-                
-              
               
         </div>
 
@@ -86,7 +79,7 @@
         </thead>
     {% if user.is_authenticated %}
             {% if result %}
-                <p>Result for search:{{query}}</p>
+                <p>Result for search: <em>{{searchfield}}</em></p>
                 {% for q in result  %}
                 <tbody> 
                     <tr>
