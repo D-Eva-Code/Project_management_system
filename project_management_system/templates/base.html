@@ -74,14 +74,14 @@
                     aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <span class="navbar-brand">
+            <span class="navbar-brand"style="font-weight:800px;">
                 {% if user.role == 'supervisor' %}
-            <span  class=" fw-bold student-text dashboardtext"> Supervisor</span>
-            <span class="fw-bold dashboard-text"style="color:black; margin-left:0;"> Dashboard</span>
+            <span  class=" fw-bold student-text dashboardtext"> SUPERVISOR</span>
+            <span class="fw-bold dashboard-text"style="color:black; margin-left:0;"> DASHBOARD</span>
         
             {% elif user.role == 'student' %}
-             <span  class=" fw-bold student-text dashboardtext"> Student</span>
-            <span class="fw-bold dashboard-text"style="color:black; margin-left:0;"> Dashboard</span>
+             <span  class=" fw-bold student-text dashboardtext"> STUDENT</span>
+            <span class="fw-bold dashboard-text"style="color:black; margin-left:0;"> DASHBOARD</span>
             {% endif %}
             </span>
                 <form class="d-flex" action="{% url "logout" %}" method="POST">

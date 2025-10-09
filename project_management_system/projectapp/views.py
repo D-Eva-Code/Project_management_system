@@ -6,6 +6,7 @@ from django.conf import settings
 from .forms import UploadForm
 from .models import Document
 from django.contrib import messages
+from django.urls import reverse
 # Create your views here.
 @login_required
 def student(request):
@@ -62,6 +63,24 @@ def student_projects(request, student_id):
     projects= Document.objects.filter(owner=student)
     return render(request, 'student_projects.html', {'student':student, 'projects': projects})
 
+@login_required
+def delete_file(request, file_id):
+    file = Document.objects.get(id=file_id)
+    if file.owner == request.user:
+        file.delete()
+    else:
+        messages.error("Access restricted")
+    return redirect('project:projectupload')
+
+@login_required
+def search_view(request):
+    searchfield = request.GET.get('q')
+    result=[]
+    if searchfield:
+        result= Document.objects.filter(title__icontains=searchfield).distinct()
+    else:
+        result= Document.objects.all()
+    return render(request, 'project.html', {'result':result, 'searchfield':searchfield})
 # def update_project_status(request, document_id):
 #     document= Document.objects.get(id=document_id)
 #     if request.user== document.supervisor:

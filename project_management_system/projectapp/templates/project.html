@@ -6,35 +6,153 @@
 {% block content %}
 
 
-   <div class= "container px-5">
-    <div class= "table-responsive mt-3">
-       <table class="table table-striped align-middle">
+   <div class= "container px-4">
+    <div class="row mt-4">
+            <div class="col-5">
+                <div class="file-card">
+                    <div class="file-header">
+                        
+                        {% with loop_form.count as totalcounts %}
+                            <span class="badge bg-primary">{{totalcounts}} project{{totalcounts|pluralize}} uploaded</span>
+                        {% endwith %}
+                    </div>
+                        <p>Last Upload: {{loop_form.upload_time}} </p>
+                </div>
+            </div>
+            <div class="col-6">
+                <form method="GET" action="{% url "project:search" %}">
+                    {% comment %} {% csrf_token %} {% endcomment %}
+                <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><button type="submit" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-2 py-2">&#128269;</button></div>
+                        </div>
+                        <input type="text" class="form-control" id="forminput" placeholder="Search Project">
+                </div>
+            </form>
+            </div>
+           
+                {% comment %} <div class="col-1 my-1">
+                    
+                    <button type="submit" class="btn btn-outline-gray btn-sm fw-bold rounded-pill px-2 py-2">&#128269;</button>
+                </div> {% endcomment %}
+                
+              
+              
+        </div>
+
+
+
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Product Name: Widget A</h5>
+        <p class="card-text">Price: $19.99</p>
+        <p class="card-text">Category: Electronics</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Product Name: Gadget B</h5>
+        <p class="card-text">Price: $29.99</p>
+        <p class="card-text">Category: Accessories</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Product Name: Item C</h5>
+        <p class="card-text">Price: $9.99</p>
+        <p class="card-text">Category: Home Goods</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class= "table-responsive movingtable mt-4 shadow rounded">
+       <table class="table table-striped align-middle mt-3">
         <thead class="thead-dark">  
             <tr>
-                <th class="col-5">File</th>
-                <th class="col-3">Status</th>
-                <th class="col-4">Time Uploaded</th>
+                <th class="col-4">File</th>
+                <th class="col-2">Status</th>
+                <th class="col-3">Time Uploaded</th>
+                <th></th>
                 </tr>
         </thead>
     {% if user.is_authenticated %}
-        {% if loop_form %}
+            {% if result %}
+                <p>Result for search:{{query}}</p>
+                {% for q in result  %}
+                <tbody> 
+                    <tr>
+                        <td><a href="{{q.file.url}}" target= "_blank">{{q.title}}</a></td>
+                        <td>{{document.get_status_display}}</td>
+                        <td>{{q.upload_time}}</td>
+                        <td><button type="button" class="btn btn-outline-danger rounded-pill"
+                            data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>
+
+                    </tr>
+                </tbody>
+                {% endfor %}
+            
+
+        {% elif loop_form %}
             {% for a in loop_form %}
             <tbody>  
                     <tr>
                         <td><a href="{{a.file.url}}" target= "_blank">{{a.title}}</a></td>
                         <td>{{document.get_status_display}}</td>
                         <td>{{a.upload_time}}</td>
+                        <td><button type="button" class="btn btn-outline-danger rounded-pill"
+                            data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>
 
                     </tr>
-
             </tbody>
+             {% empty %}
+        <p>Nothing uploaded</p>
             {% endfor %}
-        {% else %}
-            <p>Nothing uploaded</p>
+       
             
-        {% endif %}
-    {% else %}
-        <p>Please log in to view your content.</p>
+    {% endif %}
+    
+        </table>
+        </div>
+            
+            {% for a in loop_form  %}
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <i class="fas fa-exclamation-triangle warning-icon"></i>
+                                <p class="mb-0">Are you sure you want to delete this document?<br>This action cannot be undone.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </button>
+                                <a type="button" class="btn btn-danger" href="{% url "project:delete_projects" a.id %}">
+                                        <i class="fas fa-trash-alt me-2"></i>Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            {% endfor %}
+        
+        
+        
+    {% comment %} {% else %}
+        <p>Please log in to view your content.</p> {% endcomment %}
     {% endif %}
        </table>
     </div>
