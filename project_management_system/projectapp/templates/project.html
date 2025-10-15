@@ -6,15 +6,15 @@
 {% block content %}
 
 
-   <div class= "container px-4">
+   <div class= "container px-5">
     <div class="row mt-4">
             <div class="col-5">
                 <div class="file-card">
                     <div class="file-header">
                         
-                        {% with loop_form.count as totalcounts %}
-                            <span class="badge bg-primary">{{totalcounts}} project{{totalcounts|pluralize}} uploaded</span>
-                        {% endwith %}
+                       
+                            <span class="text-darkblue fw-bold"> Project Updates</span>
+                      
                     </div>
                         <p>Last Upload: {{loop_form.last.upload_time}} </p>
                 </div>
@@ -39,29 +39,28 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   <div class="col">
     <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Product Name: Widget A</h5>
-        <p class="card-text">Price: $19.99</p>
-        <p class="card-text">Category: Electronics</p>
+      <div class="card-body bg-darkblue text-white">
+        <h5 class="card-title">Projects In Review</h5>
+        <p class="card-text">2</p>
       </div>
     </div>
   </div>
   <div class="col">
     <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Product Name: Gadget B</h5>
-        <p class="card-text">Price: $29.99</p>
-        <p class="card-text">Category: Accessories</p>
+      <div class="card-body bg-darkblue text-white">
+        <h5 class="card-title">Projects Approved</h5>
+        <p class="card-text">0</p>
       </div>
     </div>
   </div>
   <div class="col">
     <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Product Name: Item C</h5>
-        <p class="card-text">Price: $9.99</p>
-        <p class="card-text">Category: Home Goods</p>
-      </div>
+      <div class="card-body bg-darkblue text-white">
+        <h5 class="card-title">Total Projects Uploaded</h5>
+        {% with loop_form.count as totalcounts %}
+      <span class="fw-bold card-text">{{totalcounts}}</span>
+       {% endwith %}
+    </div>
     </div>
   </div>
 </div>
@@ -99,7 +98,7 @@
             <tbody>  
                     <tr>
                         <td><a href="{{a.file.url}}" target= "_blank">{{a.title}}</a></td>
-                        <td>{{document.get_status_display}}</td>
+                        <td>{{a.get_status_display}}</td>
                         <td>{{a.upload_time}}</td>
                         <td><button type="button" class="btn btn-outline-danger rounded-pill"
                             data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>

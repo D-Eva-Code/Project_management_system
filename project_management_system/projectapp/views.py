@@ -81,12 +81,16 @@ def search_view(request):
     else:
         result= Document.objects.all()
     return render(request, 'project.html', {'result':result, 'searchfield':searchfield})
-# def update_project_status(request, document_id):
-#     document= Document.objects.get(id=document_id)
-#     if request.user== document.supervisor:
-#         if request.method=="POST":
-#             new_status= request.POST.get("status")
-#             document.status= new_status
-#             document.save()
-#             return redirect('supervisordashboard')
-#     return render(request, 'supervisor_dashboard.html', {"document":document})
+
+@login_required
+def update_project_status(request, document_id):
+    document= Document.objects.get(id=document_id)
+    # if request.user== document.supervisor:
+    if request.user.id == document.supervisor.id:
+        if request.method=="POST":
+            new_status= request.POST.get("status")
+            document.status= new_status
+            document.save()
+            return redirect('project:supervisordashboard', supervisor_id=request.user.id)
+
+    return render(request, 'supervisor_dashboard.html', {"document":document})

@@ -318,3 +318,18 @@
   overflow-y: hidden;
   overflow-x: hidden;
 }
+.card-body.bg-darkblue{
+  /* background-color: #040461 !important; */
+  background-color: #1a1f36!important;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.card-body.bg-darkblue:hover{
+  background-color: white!important;
+  color: #040461!important;
+  transition: background-color 160ms ease;
+  font-weight: bold;
+}
+.text-darkblue{
+  color: #040461 !important;
+}

@@ -20,10 +20,8 @@ class Document(models.Model):
     timeviewed= models.DateTimeField(auto_now= True)
     supervisor= models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        null=True,
-        blank=True,
-        on_delete= models.SET_NULL,
-        related_name= 'students_supervisor'
+        on_delete= models.CASCADE,
+        related_name= 'documents'
     )
     # student= models.ForeignKey(
     #     settings.AUTH_USER_MODEL,

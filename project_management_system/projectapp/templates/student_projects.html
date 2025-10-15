@@ -17,9 +17,9 @@
                   <table class="table table-striped align-middle">
                         <thead>
                               <tr>
-                              <th class="fw-bold col-4">File</th>
+                              <th class="fw-bold col-2">File</th>
                               <th class="fw-bold col-4">Description/Changes made</th>
-                              <th class="fw-bold col-2">Status</th>
+                              <th class="fw-bold col-4">Status</th>
                               <th class="fw-bold col-2">Time Submitted</th>
                               </tr>
                         </thead>
@@ -27,9 +27,21 @@
                         <tbody> 
                               
                               <tr>
-                              <td class="col-4"><a href="{{project.file.url}}" target='_blank'>{{ project.title}}</a></td>
+                              <td class="col-2"><a href="{{project.file.url}}" target='_blank'>{{ project.title}}</a></td>
                               <td class="col-4">{{project.description}}</td>
-                              <td class="col-2">submitted</td>
+                              <td class="col-4">
+                                     <form method="POST" action="{% url 'project:update_project_status' project.id %}">
+                                    {% csrf_token %}
+                                    <select name="status">
+                                          {% for value, label in project.STATUS_CHOICES %}
+                                                <option value="{{ value }}" {% if project.status == value %}selected{% endif %}>
+                                                {{ label }}
+                                          </option>
+                                          {% endfor %}
+                                    </select>
+                                    <button type="submit">Update</button>
+                                </form>
+                              </td>
                               <td class="col-2">{{project.upload_time}}</td>
                                     </tr>
                              
