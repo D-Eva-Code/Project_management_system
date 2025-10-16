@@ -333,3 +333,11 @@
 .text-darkblue{
   color: #040461 !important;
 }
+.status-dot {
+  display: inline-block!important;
+  width: 10px!important;
+  height: 10px!important;
+  border-radius: 50%!important;
+  margin-right: 6px!important;
+  vertical-align: middle!important;
+}

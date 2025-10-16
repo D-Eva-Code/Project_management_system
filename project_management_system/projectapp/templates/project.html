@@ -83,7 +83,15 @@
                 <tbody> 
                     <tr>
                         <td><a href="{{q.file.url}}" target= "_blank">{{q.title}}</a></td>
-                        <td>{{document.get_status_display}}</td>
+                        {% if q.status == 'submitted' %}
+                        <td class="badge rounded-pill bg-secondary">{{q.get_status_display}}</td>
+                        {% elif q.status == 'in_review' %}
+                        <td class="badge rounded-pill bg-primary">{{q.get_status_display}}</td>
+                        {% elif q.status == 'not_approved' %}
+                        <td class="badge rounded-pill bg-danger">{{q.get_status_display}}</td>
+                        {% elif q.status == 'approved' %}
+                        <td class="badge rounded-pill bg-success">{{q.get_status_display}}</td>
+                        {% endif %}
                         <td>{{q.upload_time}}</td>
                         <td><button type="button" class="btn btn-outline-danger rounded-pill"
                             data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>
@@ -98,7 +106,17 @@
             <tbody>  
                     <tr>
                         <td><a href="{{a.file.url}}" target= "_blank">{{a.title}}</a></td>
-                        <td>{{a.get_status_display}}</td>
+                        <td>
+                            {% if a.status == "in_review" %}
+                                <span class="status-dot bg-warning"></span> In Review
+                            {% elif a.status == "approved" %}
+                                <span class="status-dot bg-success"></span> Approved
+                            {% elif a.status == "not_approved" %}
+                                <span class="status-dot bg-danger"></span> Rejected
+                            {% elif a.status == "submitted" %}
+                                <span class="status-dot bg-primary"></span> Submitted
+                            {% endif %}
+                            </td>
                         <td>{{a.upload_time}}</td>
                         <td><button type="button" class="btn btn-outline-danger rounded-pill"
                             data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>
