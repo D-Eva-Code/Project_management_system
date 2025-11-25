@@ -149,13 +149,13 @@
                                         </td>
 
                                         <td class="col-3" id="upload-area-{{ q.id }}" style="color: gray">
-                                            {% with note=notifications|dictsort:"-created_at"|first %}
-                                                {% if note and note.student.id == q.id %}
-                                                    {{ note.message }}
+                                             {% if student_messages|get_item:q.id != "No new uploads" %}
+                                                    <span style="color: green; font-weight: bold;">
+                                                        {{ student_messages|get_item:q.id }}
+                                                    </span>
                                                 {% else %}
-                                                    No new uploads
+                                                    {{ student_messages|get_item:q.id }}
                                                 {% endif %}
-                                            {% endwith %}
                                         </td>
 
                                         <td class="col-4">Submitted</td>

@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Q
 from .models import Notification
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 @login_required
@@ -87,7 +88,15 @@ def student_projects(request, student_id):
     student = CustomUser.objects.get(id=student_id, role='student')
     projects= Document.objects.filter(owner=student)
     Notification.objects.filter(supervisor=request.user, student=student, is_read=False).update(is_read=True)
-    return render(request, 'student_projects.html', {'student':student, 'projects': projects})
+    paginator = Paginator(projects,4)
+    page_number = request.GET.get('page')
+    try: 
+        project_pages = paginator.page(page_number)
+    except PageNotAnInteger: 
+        project_pages = paginator.page(1)
+    except EmptyPage: 
+        project_pages = paginator.page(paginator.num_pages)
+    return render(request, 'student_projects.html', {'student':student, 'projects': projects, 'project_pages': project_pages})
 
 @login_required
 def delete_file(request, file_id):

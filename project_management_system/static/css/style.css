@@ -341,3 +341,42 @@
   margin-right: 6px!important;
   vertical-align: middle!important;
 }
+
+.btn-update {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.btn-update:hover {
+    background-color: #0056b3;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    gap: 15px;             
+    margin: 20px 0;         
+    font-family: Arial, sans-serif;
+}
+
+.pagination-btn {
+    padding: 8px 15px;
+    background-color: #4CAF50; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.pagination-btn:hover {
+    background-color: #45a049;
+}
+
+.pagination-info {
+    font-weight: bold;
+}

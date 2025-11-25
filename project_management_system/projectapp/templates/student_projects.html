@@ -11,7 +11,10 @@
       <div class= "container px-4">
            
             <div class="container px-5">
+                  <div class = "card mt-4 mb-4 p-4 shadow-sm">
                   <h2 class= "fw-bold">{{student.get_full_name}}  {{student.matric_number}}</h2>
+                  <h6>Email: {{student.email}}</h6>
+                  </div>
                    <p style="color:red;">Reminder: Please ensure to update student's project status</p>
                   <div class= "table-responsive mt-3">
                   <table class="table table-striped align-middle">
@@ -23,7 +26,7 @@
                               <th class="fw-bold col-2">Time Submitted</th>
                               </tr>
                         </thead>
-                        {% for project in projects %} 
+                        {% for project in project_pages %} 
                         <tbody> 
                               
                               <tr>
@@ -32,14 +35,14 @@
                               <td class="col-4">
                                      <form method="POST" action="{% url 'project:update_project_status' project.id %}">
                                     {% csrf_token %}
-                                    <select name="status">
+                                    <select name="status" class="form-select form-select-sm">
                                           {% for value, label in project.STATUS_CHOICES %}
                                                 <option value="{{ value }}" {% if project.status == value %}selected{% endif %}>
                                                 {{ label }}
                                           </option>
                                           {% endfor %}
                                     </select>
-                                    <button type="submit">Update</button>
+                                    <button type="submit" class = "btn-update" >Update</button>
                                 </form>
                               </td>
                               <td class="col-2">{{project.upload_time}}</td>
@@ -55,6 +58,20 @@
                   </div>
             
    </div>
+      <div class="pagination-container">
+    {% if project_pages.has_previous %}
+        <a href="?page={{ pproject_pages.previous_page_number }}" class="pagination-btn">Previous</a>
+    {% endif %}
+
+    <span class="pagination-info">
+       {{ project_pages.number }} of {{ project_pages.paginator.num_pages }}
+    </span>
+
+    {% if project_pages.has_next %}
+        <a href="?page={{ project_pages.next_page_number }}" class="pagination-btn">Next</a>
+    {% endif %}
+</div>
+
 {% endblock content %}
            
 </html>
