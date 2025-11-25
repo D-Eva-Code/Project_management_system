@@ -12,4 +12,5 @@ urlpatterns =[
     path('supervisor/student/<int:student_id>/projects/', views.student_projects, name='student_projects'),
     path('student/<int:file_id>/', views.delete_file, name='delete_projects'),
     path('student/search/', views.search_view, name='search'),
+    path('student/searchstudent/', views.search_student, name='searchname'),
 ]

@@ -1,7 +1,8 @@
 
 {% load crispy_forms_tags %}
 {% load static %}
-{% load static %}
+
+{% load dict_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +105,7 @@
 
     </div>
  {% comment %} body content{% endcomment %}
+ {% if user.is_authenticated %}
       <div class= "container px-4" >
             <div >
                 <div class=" text-dark  mt-3 mb-3 px-3">
@@ -114,25 +116,85 @@
       
             
             <div class="container px-3">
+                <div class= "row">
+                    <div class= "col-6">
                   <h2>Here's a list of your students</h2>
+                    </div>
+                    <div class="col-6">
+                  <form method="GET" action="{% url "project:searchname" %}">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><button type="submit" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-2 py-2">&#128269;</button></div>
+                        </div>
+                            <input type="text" name="n" class="form-control" id="forminput" placeholder="Search Project">
+                    </div>
+                </form>
+            </div>
+        </div>
                   <div class= "table-responsive mt-3">
                   <table class="table table-striped align-middle">
-                        {% for student in students %} 
-                        <tbody> 
-                              
-                              <tr>
-                              <td class="col-3">{{ student.get_full_name }}</td>
-                              <td class="col-2">{{ student.matric_number }}</td>
-                              <td class="col-3" id="tabledata" ><a href="{% url "project:student_projects" student.id %}">View Student's Project Details...</a></td>
-                              <td class="col-3" id="upload-area-{{student.id}}"style="color: gray">No new uploads</td>
-                              <td class="col-4">Submitted</td>
+
+                            {% if resultname %}
+                                <p>Result for search: <em>{{ searchstudent }}</em></p>
+
+                                {% for q in resultname %}
+                                <tbody> 
+                                    <tr>
+                                        <td class="col-3">{{ q.get_full_name }}</td>
+                                        <td class="col-2">{{ q.matric_number }}</td>
+                                        <td class="col-3">
+                                            <a href="{% url 'project:student_projects' q.id %}">
+                                                View Student's Project Details...
+                                            </a>
+                                        </td>
+
+                                        <td class="col-3" id="upload-area-{{ q.id }}" style="color: gray">
+                                            {% with note=notifications|dictsort:"-created_at"|first %}
+                                                {% if note and note.student.id == q.id %}
+                                                    {{ note.message }}
+                                                {% else %}
+                                                    No new uploads
+                                                {% endif %}
+                                            {% endwith %}
+                                        </td>
+
+                                        <td class="col-4">Submitted</td>
                                     </tr>
-                              {% empty %}
-                              <h4>No students assigned yet.</h4>
-                        
-                              </tbody>
-                              {% endfor %}
-                        <div>
+                                </tbody>
+                                {% empty %}
+                                    <h4>No students found.</h4>
+                                {% endfor %}
+                            {% else %}
+                                {% for student in students %}
+                                <tbody> 
+                                    <tr>
+                                        <td class="col-3">{{ student.get_full_name }}</td>
+                                        <td class="col-2">{{ student.matric_number }}</td>
+                                        <td class="col-3">
+                                            <a href="{% url 'project:student_projects' student.id %}">
+                                                View Student's Project Details...
+                                            </a>
+                                        </td>
+
+                                       <td class="col-3" id="upload-area-{{ student.id }}" style="color: gray">
+                                                {% if student_messages|get_item:student.id != "No new uploads" %}
+                                                    <span style="color: green; font-weight: bold;">
+                                                        {{ student_messages|get_item:student.id }}
+                                                    </span>
+                                                {% else %}
+                                                    {{ student_messages|get_item:student.id }}
+                                                {% endif %}
+                                            </td>
+                                        <td class="col-4">Submitted</td>
+                                    </tr>
+                                </tbody>
+                                {% empty %}
+                                    <h4>No students assigned yet.</h4>
+                                {% endfor %}
+                            {% endif %}
+                      
+{% endif %}
+
                   </table>
                   </div>
             

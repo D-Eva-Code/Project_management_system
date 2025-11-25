@@ -41,7 +41,7 @@
     <div class="card h-100">
       <div class="card-body bg-darkblue text-white">
         <h5 class="card-title">Projects In Review</h5>
-        <p class="card-text">2</p>
+        <span class="fw-bold card-text">{{review_count}}
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
     <div class="card h-100">
       <div class="card-body bg-darkblue text-white">
         <h5 class="card-title">Projects Approved</h5>
-        <p class="card-text">0</p>
+      <span class="fw-bold card-text">{{approved_count}}</span>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
                             {% elif a.status == "approved" %}
                                 <span class="status-dot bg-success"></span> Approved
                             {% elif a.status == "not_approved" %}
-                                <span class="status-dot bg-danger"></span> Rejected
+                                <span class="status-dot bg-danger"></span> Not Approved
                             {% elif a.status == "submitted" %}
                                 <span class="status-dot bg-primary"></span> Submitted
                             {% endif %}
