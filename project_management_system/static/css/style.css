@@ -349,7 +349,7 @@
     padding: 5px 12px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 7px;
 }
 .btn-update:hover {
     background-color: #0056b3;
@@ -366,15 +366,16 @@
 
 .pagination-btn {
     padding: 8px 15px;
-    background-color: #4CAF50; 
-    color: white;
+    background-color: #f0f0f0;
+    color: #333;
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s;
 }
 
 .pagination-btn:hover {
-    background-color: #45a049;
+   background-color: #e0e0e0;
+    transform: translateY(- 1px);
 }
 
 .pagination-info {
