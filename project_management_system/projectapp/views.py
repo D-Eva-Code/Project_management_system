@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from userapp.models import CustomUser
 from django.conf import settings
-from .forms import UploadForm
+from .forms import UploadForm, EmailForm
 from .models import Document
 from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Q
 from .models import Notification
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 # Create your views here.
 @login_required
@@ -96,7 +97,25 @@ def student_projects(request, student_id):
         project_pages = paginator.page(1)
     except EmptyPage: 
         project_pages = paginator.page(paginator.num_pages)
-    return render(request, 'student_projects.html', {'student':student, 'projects': projects, 'project_pages': project_pages})
+    sent = False
+    if request.method == "POST":
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            subject = ("project update from supervisor, {}".format(request.user.get_full_name))
+            sender_email = form.cleaned_data['sender_email']
+            recipient_email = form.cleaned_data['recipient_email']
+            message = form.cleaned_data['message']
+            send_mail(
+                subject = subject,
+                message = message,
+                from_email=None, recipient_list=[recipient_email],
+                fail_silently=False,
+            )
+            sent = True
+            form = EmailForm()
+    else:
+        form = EmailForm()
+    return render(request, 'student_projects.html', {'student':student, 'projects': projects, 'project_pages': project_pages, 'sent': sent, 'form': form})
 
 @login_required
 def delete_file(request, file_id):
@@ -143,3 +162,4 @@ def search_student(request):
     else:
         resultname = CustomUser.objects.filter(role='student')
     return render(request, 'supervisor_dashboard.html', {'resultname':resultname})
+

@@ -18,7 +18,12 @@ class UploadForm(forms.ModelForm):
             'file': 'max. 42 megabytes'
         }
 
-    
+class EmailForm(forms.Form):
+    sender_email = forms.EmailField(label='Your Email', max_length=254)
+    recipient_email = forms.EmailField(label='Recipient Email', max_length=254)
+    # subject = forms.CharField(label='Subject', max_length=255)
+    message = forms.CharField(label='Message', widget=forms.Textarea)
+
     
 
 
