@@ -57,8 +57,8 @@
                         <a class="nav-link fw-bold px-3" href="{% url "project:projectupload" %}"><i class="fa-solid fa-file-text"></i> Uploads</a>
                     </li>
                     {% elif user.role == "supervisor" %}
-                     <li class="nav-item mb-3 {% if request.path == '/supervisor/uploads'%}active{% endif %}">
-                        <a class="nav-link fw-bold px-3" href="#"><i class="fa-solid fa-file-text"></i> Uploads</a>
+                     <li class="nav-item mb-3 {% if request.resolver_match.url_name == 'student_projects'%}active{% endif %}">
+                        <a class="nav-link fw-bold px-3" href={% url "project:student_projects" student_id=student.id %}><i class="fa-solid fa-file-text"></i> Uploads</a>
                     </li>
                     {% endif %}
                     <li class="nav-item mb-3 {% if request.path == '/about' %}active{% endif %}">
