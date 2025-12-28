@@ -40,10 +40,13 @@ Follow the steps below to run the project locally.
    python -m venv venv
    source venv/bin/activate
 4. Install required dependencies:
+   ```bash
    pip install -r requirements.txt
 5. Apply database migrations:
+   ```bash
    python manage.py migrate
 6. Start the development server:
+   ```bash
    python manage.py runserver
 7. Open your browser and visit:
    http://127.0.0.1:8000/
