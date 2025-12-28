@@ -49,7 +49,7 @@ Follow the steps below to run the project locally.
    ```bash
    python manage.py runserver
 7. Open your browser and visit:
-   http://127.0.0.1:8000/
+   http://127.0.0.1:8000/user/login/
    
 
 ## Future Improvements
