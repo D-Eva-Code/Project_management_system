@@ -22,8 +22,8 @@ This project was developed as a personal initiative to address common challenges
 - Django  
 - HTML  
 - CSS  
-- SQLite 
-- Postgres 
+- SQLite (initial development)
+- PostgreSQL (current database)
 
 ---
 
